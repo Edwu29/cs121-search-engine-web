@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Run server through [CS121A3 ICS Search Engine](https://github.com/abnerespinoza/cs121A3)
+Follow the README instructions and run `python3 api.py`
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -14,8 +17,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### Run server through [CS121A3 ICS Search Engine](https://github.com/abnerespinoza/cs121A3)
-Follow the README instructions and run `python3 api.py`
+
 
 ### `npm test`
 
