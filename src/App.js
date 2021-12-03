@@ -1,27 +1,38 @@
 import './App.css';
 import { useState } from 'react';
-import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { InputGroup, FormControl } from 'react-bootstrap';
+import fetch from 'node-fetch';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  let url = "http://127.0.0.1:5000/search";
   const [query, setQuery] = useState("");
+  const [urls, setUrls] = useState([]);
+  const [time, setTime] = useState("");
   const handleKeyUp = (event) => {
     setQuery(event.target.value);
-    console.log(event.target.value);
   }
-  const handleSearch = () => {
+  const handleSearch = async () => {
+    //make API call.
+    url = url + "?searchQuery=" + query;
+    let response = await fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      setUrls(data.urls)
+      setTime(data.time)
+    })
+    .catch(err => console.log(err))
 
   }
   return (
     <div className="App">
-      <Form onSubmit = {handleSearch}>
-        <Form.Group>
-          <Form.Label>Search</Form.Label>
-          <Form.Control placeholder="Enter a query" onChange = {handleKeyUp}></Form.Control>
-        </Form.Group>
-         <Button variant="primary" type="submit" >Submit</Button>
-      </Form>
+      <InputGroup >
+        <FormControl placeholder = "Enter a query: " onKeyUp = {handleKeyUp}/>
+        <Button variant="primary" onClick={handleSearch}>
+          Button
+        </Button>
+      </InputGroup>
     </div>
   );
 }
