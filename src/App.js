@@ -12,26 +12,42 @@ function App() {
   const [time, setTime] = useState("");
   const handleKeyUp = (event) => {
     setQuery(event.target.value);
+    if (event.keyCode == 13) {
+      handleSearch();
+    }
   }
+
   const handleSearch = async () => {
+    setUrls([])
     //make API call.
     url = url + "?searchQuery=" + query;
     let response = await fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      setUrls(data.urls)
-      setTime(data.time)
-    })
-    .catch(err => console.log(err))
-
+      .then(response => response.json())
+      .then(data => {
+        setUrls(data.urls)
+        setTime(data.time)
+      })
+      .catch(err => console.log(err))
   }
   return (
     <div className="App">
       <InputGroup >
-        <FormControl placeholder = "Enter a query: " onKeyUp = {handleKeyUp}/>
-        <Button variant="primary" onClick={handleSearch}>
-          Button
-        </Button>
+        <div className='header'>
+          <div className='search'>
+            <FormControl className='searchbar' placeholder="Enter a query: " onKeyUp={handleKeyUp} />
+            <Button variant="primary" onClick={handleSearch}>
+              Search
+            </Button>
+          </div>
+          {time && <p className='timer'>Results found in {time.toFixed(4)} milliseconds!</p>}
+        </div>
+        <div className='results'>
+          {
+            urls.map((url, index) => <div key={`result-${index}`} className='result'>
+              <a target="_blank" rel="noopener noreferrer" href={url}>{url}</a>
+            </div>)
+          }
+        </div>
       </InputGroup>
     </div>
   );

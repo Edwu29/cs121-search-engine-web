@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin: 5vh 10vw;
 }
 
 .App-logo {
@@ -35,4 +36,36 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.input-group {
+  flex-direction: column;
+}
+
+.search {
+  display: flex;
+  margin-bottom: .5vh;
+}
+
+.searchbar {
+  margin-right: 1vw;
+}
+
+.header {
+  display: block;
+  width: 50%;
+}
+
+.timer {
+  text-align: right;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+}
+
+.result a{
+  float: left;
+  margin-top: 1vh;
 }
